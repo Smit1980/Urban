@@ -1,80 +1,80 @@
-клас Дома:
-    деф __init__(себя, ихя, nomér_of_floors):
- себя.имия = ихя
- себя.nomer_of_etajey = nomer_of_floors
+class House:
+    def __init__(self, name, number_of_floors):
+        self.name = name
+        self.number_of_floors = number_of_floors
 
- деф __str__(себя):
- возврат f"Название: {себя.имия}, кол-во этажей: {себя.nomer_of_etajey}"
+    def __str__(self):
+        return f"Название: {self.name}, кол-во этажей: {self.number_of_floors}"
 
- деф __леен__(себя):
- возврат себя.nomer_of_etajey
+    def __len__(self):
+        return self.number_of_floors
 
-    #Сравненные по роличеству с уважением
- деф __eq__(себя, другое):
- если инстанция(другое, Дом):
- возврат себя.nomer_of_etajey == drugoe.nomer_of_etajey
- возврат Ложный
+    # Сравнение по количеству этажей
+    def __eq__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors == other.number_of_floors
+        return False
 
- деф __ne__(себя, другое):
- возврат не себя.__eq__(другое)
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
- деф __lt__(себя, другое):
- если инстанция(другое, Дом):
- возврат себя.nomer_of_etajey < drugoe.nomer_of_etajey
- возврат Ложный
+    def __lt__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors < other.number_of_floors
+        return False
 
- деф __le__(себя, другое):
- если инстанция(другое, Дом):
- возврат себя.nomer_of_etajey <= drugoe.nomer_of_etajey
- возврат Ложный
+    def __le__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors <= other.number_of_floors
+        return False
 
- деф __gt__(себя, другое):
- если инстанция(другое, Дом):
- возврат себя.nomer_of_etajey > drugoe.nomer_of_etajey
- возврат Ложный
+    def __gt__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors > other.number_of_floors
+        return False
 
- деф __ge__(себя, другое):
- если инстанция(другое, Дом):
- возврат себя.nomer_of_etajey >= drugoe.nomer_of_etajey
- возврат Ложный
+    def __ge__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors >= other.number_of_floors
+        return False
 
-    #Арифметические оратории
- деф __добавит__(я, ченность):
- если инстанция(значное, инт):
- себя.nomer_of_etajey += значное
- возврат себя
+    # Арифметические операторы
+    def __add__(self, value):
+        if isinstance(value, int):
+            self.number_of_floors += value
+        return self
 
- деф __radd__(я, ченность):
- возврат себя.__добавит__(стоймость)
+    def __radd__(self, value):
+        return self.__add__(value)
 
- деф __iadd__(я, ченность):
- возврат себя.__добавит__(стоймость)
+    def __iadd__(self, value):
+        return self.__add__(value)
 
-#Пример выпольный программ
-h1 = Дом('ЖК'Эльфбрус', 10)
-h2 = Dom('ЖК Акация', 20)
+# Пример выполнения программы
+h1 = House('ЖК Эльбрус', 10)
+h2 = House('ЖК Акация', 20)
 
-#Вывод объектов
-печать(х1)
-печать(х2)
+# Вывод объектов
+print(h1)
+print(h2)
 
-#Сравние
-печат (h1 == h2) # __eq__
+# Сравнение
+print(h1 == h2)  # __eq__
 
-#Увеличное это с уважением
-h1 = h1 + 10 # __add__
-печать(х1)
-печат (h1 == h2)
+# Увеличение этажей
+h1 = h1 + 10  # __add__
+print(h1)
+print(h1 == h2)
 
-h1 += 10 # __iadd__
-печать(х1)
+h1 += 10  # __iadd__
+print(h1)
 
-h2 = 10 + h2 # __radd__
-печать(х2)
+h2 = 10 + h2  # __radd__
+print(h2)
 
-#Другие операторы сравнивая
-печать(h1 > h2) # __gt__
-печать(h1 >= h2) # __ge__
-печат (h1 < h2) # __lt__
-печат (h1 <= h2) # __le__
-печат (ч1 != h2) # __ne__
+# Другие операторы сравнения
+print(h1 > h2)   # __gt__
+print(h1 >= h2)  # __ge__
+print(h1 < h2)   # __lt__
+print(h1 <= h2)  # __le__
+print(h1 != h2)  # __ne__
