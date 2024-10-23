@@ -1,0 +1,23 @@
+class House:
+    def __init__(self, name, number_of_floors):
+        """Инициализация объекта с именем и количеством этажей."""
+        self.name = name
+        self.number_of_floors = number_of_floors
+
+    def go_to(self, new_floor):
+        """Метод для перемещения на указанный этаж."""
+        if 1 <= new_floor <= self.number_of_floors:
+            # Выводим поочередно все этажи от 1 до new_floor включительно
+            for floor in range(1, new_floor + 1):
+                print(floor)
+        else:
+            # Если этаж некорректен, выводим сообщение об ошибке
+            print("Такого этажа не существует")
+
+# Пример использования
+h1 = House('ЖК Горский', 18)
+h2 = House('Домик в деревне', 2)
+
+# Вызов метода go_to для обоих домов
+h1.go_to(5)  # Должно вывести этажи от 1 до 5
+h2.go_to(10)  # Должно вывести "Такого этажа не существует"
