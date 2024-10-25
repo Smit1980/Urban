@@ -1,27 +1,29 @@
 # Родительский класс для животных
 class Animal:
+    alive = True  # Атрибут класса, указывает что животное живо
+    fed = False   # Атрибут класса, указывает что животное не накормлено
+
     def __init__(self, name):
-        self.name = name
-        self.alive = True  # Живой по умолчанию
-        self.fed = False   # Накормлен ли по умолчанию
+        self.name = name  # Индивидуальный атрибут экземпляра
 
     def eat(self, food):
         """Метод для поедания растений"""
         if isinstance(food, Plant):  # Проверяем, является ли еда растением
-            if food.edible:  # Если съедобно
+            if food.edible:  # Если растение съедобно
                 print(f"{self.name} съел {food.name}")
-                self.fed = True  # Животное накормлено
-            else:  # Если не съедобно
+                self.__class__.fed = True  # Животное накормлено, изменяем атрибут класса
+            else:  # Если растение несъедобно
                 print(f"{self.name} не стал есть {food.name}")
-                self.alive = False  # Животное погибает
+                self.__class__.alive = False  # Животное погибает, изменяем атрибут класса
         else:
             print(f"{self.name} не ест {food}")
 
 # Родительский класс для растений
 class Plant:
+    edible = False  # Атрибут класса, по умолчанию растение несъедобное
+
     def __init__(self, name):
-        self.name = name
-        self.edible = False  # По умолчанию растение несъедобное
+        self.name = name  # Индивидуальный атрибут экземпляра
 
 # Классы-наследники для животных
 class Mammal(Animal):
@@ -35,24 +37,4 @@ class Flower(Plant):
     pass  # Цветы несъедобные по умолчанию
 
 class Fruit(Plant):
-    def __init__(self, name):
-        super().__init__(name)
-        self.edible = True  # Фрукты съедобные
-
-# Пример использования
-a1 = Predator('Волк с Уолл-Стрит')
-a2 = Mammal('Хатико')
-p1 = Flower('Цветик семицветик')
-p2 = Fruit('Заводной апельсин')
-
-print(a1.name)  # Волк с Уолл-Стрит
-print(p1.name)  # Цветик семицветик
-
-print(a1.alive)  # True, Волк жив
-print(a2.fed)    # False, Хатико не накормлен
-
-a1.eat(p1)       # Волк пытается съесть цветок
-a2.eat(p2)       # Хатико ест апельсин
-
-print(a1.alive)  # False, Волк погиб
-print(a2.fed)    # True, Хатико накормлен
+    edible = True  # Фрукты съедобн
