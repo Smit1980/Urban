@@ -1,0 +1,49 @@
+# Класс, описывающий лошадь
+class Horse:
+    def __init__(self):
+        self.x_distance = 0  # Пройденный путь
+        self.sound = 'Frrr'  # Звук, который издаёт лошадь
+
+    def run(self, dx):
+        """Метод для передвижения лошади по горизонтали"""
+        self.x_distance += dx
+
+# Класс, описывающий орла
+class Eagle:
+    def __init__(self):
+        self.y_distance = 0  # Высота полета
+        self.sound = 'I train, eat, sleep, and repeat'  # Звук, который издаёт орёл
+
+    def fly(self, dy):
+        """Метод для передвижения орла по вертикали"""
+        self.y_distance += dy
+
+# Класс, описывающий пегаса, наследуемый от Horse и Eagle
+class Pegasus(Horse, Eagle):
+    def __init__(self):
+        Horse.__init__(self)
+        Eagle.__init__(self)
+
+    def move(self, dx, dy):
+        """Метод для передвижения пегаса по горизонтали и вертикали"""
+        self.run(dx)
+        self.fly(dy)
+
+    def get_pos(self):
+        """Метод для получения текущего положения пегаса"""
+        return self.x_distance, self.y_distance
+
+    def voice(self):
+        """Метод для воспроизведения звука пегаса"""
+        print(self.sound)
+
+# Пример использования классов
+p1 = Pegasus()
+
+print(p1.get_pos())  # (0, 0)
+p1.move(10, 15)
+print(p1.get_pos())  # (10, 15)
+p1.move(-5, 20)
+print(p1.get_pos())  # (5, 35)
+
+p1.voice()  # I train, eat, sleep, and repeat
