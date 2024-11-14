@@ -9,6 +9,4 @@ def apply_all_func(int_list, *functions):
     
     return results  # Возвращаем словарь с результатами
 
-# Пример использования функции
-print(apply_all_func([6, 20, 15, 9], max, min))  # Ожидаемый вывод: {'max': 20, 'min': 6}
-print(apply_all_func([6, 20, 15, 9], len, sum, sorted))  # Ожидаемый вывод: {'len': 4, 'sum': 50, 'sorted': [6, 9, 15, 20]}
+
