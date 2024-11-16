@@ -1,20 +1,26 @@
-def apply_all_func(int_list, *functions):
-    # Создаем пустой словарь для хранения результатов
-    results = {}
+# Данные списки
+first_strings = ['Elon', 'Musk', 'Programmer', 'Monitors', 'Variable']
+second_strings = ['Task', 'Git', 'Comprehension', 'Java', 'Computer', 'Assembler']
 
-    # Перебираем все переданные функции
-    for func in functions:
-        # Сохраняем результат выполнения функции в словарь
-        results[func.__name__] = func(int_list)
+# 1. Список длин строк из first_strings, если длина >= 5
+first_result = [len(string) for string in first_strings if len(string) >= 5]
 
-    # Возвращаем словарь с результатами
-    return results
+# 2. Список кортежей из пар слов одинаковой длины из first_strings и second_strings
+second_result = [
+    (word1, word2) 
+    for word1 in first_strings 
+    for word2 in second_strings 
+    if len(word1) == len(word2)
+]
 
-# Пример использования функции
-if __name__ == "__main__":
-    # Передаем список чисел и функции
-    print(apply_all_func([6, 20, 15, 9], max, min))
-    # Ожидаемый результат: {'max': 20, 'min': 6}
+# 3. Словарь из объединённых списков, где ключ - строка, значение - длина строки (только для строк с чётной длиной)
+third_result = {
+    string: len(string) 
+    for string in first_strings + second_strings 
+    if len(string) % 2 == 0
+}
 
-    print(apply_all_func([6, 20, 15, 9], len, sum, sorted))
-    # Ожидаемый результат: {'len': 4, 'sum': 50, 'sorted': [6, 9, 15, 20]}
+# Вывод результатов
+print(first_result)
+print(second_result)
+print(third_result)
