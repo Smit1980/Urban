@@ -1,0 +1,42 @@
+def introspection_info(obj):
+    """
+    Функция для получения информации об объекте, включая его тип, атрибуты, методы и модуль.
+    """
+    info = {}
+    # Определяем тип объекта
+    info['type'] = type(obj).__name__
+    # Определяем модуль, к которому объект принадлежит
+    info['module'] = getattr(obj, '__module__', 'built-in')
+    # Получаем все атрибуты объекта
+    attributes = [attr for attr in dir(obj) if not callable(getattr(obj, attr)) and not attr.startswith('__')]
+    # Получаем все методы объекта
+    methods = [attr for attr in dir(obj) if callable(getattr(obj, attr)) and not attr.startswith('__')]
+    # Специальные (магические) методы
+    special_methods = [attr for attr in dir(obj) if attr.startswith('__') and callable(getattr(obj, attr))]
+    
+    info['attributes'] = attributes
+    info['methods'] = methods
+    info['special_methods'] = special_methods
+
+    return info
+
+
+# Тестируем на стандартном типе данных
+number_info = introspection_info(42)
+print("Информация об объекте числа:", number_info)
+
+# Создаем пользовательский класс для тестирования
+class CustomClass:
+    def __init__(self, value):
+        self.value = value
+
+    def say_hello(self):
+        return f"Hello, {self.value}!"
+
+    def add_value(self, num):
+        return self.value + num
+
+# Тестируем на объекте пользовательского класса
+custom_obj = CustomClass(10)
+custom_info = introspection_info(custom_obj)
+print("\nИнформация о пользовательском объекте:", custom_info)
