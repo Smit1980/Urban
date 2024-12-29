@@ -1,0 +1,73 @@
+import unittest
+
+# Глобальная переменная для контроля заморозки тестов
+is_frozen = False
+
+# Декоратор для управления выполнением тестов
+def freeze_test(func):
+    def wrapper(*args, **kwargs):
+        if is_frozen:
+            print(f"Тест '{func.__name__}' заморожен.")
+            return unittest.skip("Тесты в этом кейсе заморожены")(func)(*args, **kwargs)
+        return func(*args, **kwargs)
+    return wrapper
+
+
+# Пример класса тестов
+class RunnerTest(unittest.TestCase):
+    @freeze_test
+    def test_walk(self):
+        runner = Runner(name="Test Runner", speed=5)
+        for _ in range(10):
+            runner.walk()
+        self.assertEqual(runner.distance, 50)
+
+    @freeze_test
+    def test_run(self):
+        runner = Runner(name="Test Runner", speed=10)
+        for _ in range(10):
+            runner.run()
+        self.assertEqual(runner.distance, 100)
+
+    @freeze_test
+    def test_challenge(self):
+        runner1 = Runner(name="Runner 1", speed=10)
+        runner2 = Runner(name="Runner 2", speed=5)
+        for _ in range(10):
+            runner1.run()
+            runner2.walk()
+        self.assertNotEqual(runner1.distance, runner2.distance)
+
+
+class TournamentTest(unittest.TestCase):
+    @freeze_test
+    def test_usain_and_nick(self):
+        tournament = Tournament(distance=90, runners=[
+            Runner(name="Usain", speed=10),
+            Runner(name="Nick", speed=3),
+        ])
+        results = tournament.start()
+        self.assertTrue(results[max(results.keys())] == "Nick")
+
+    @freeze_test
+    def test_andrey_and_nick(self):
+        tournament = Tournament(distance=90, runners=[
+            Runner(name="Andrey", speed=9),
+            Runner(name="Nick", speed=3),
+        ])
+        results = tournament.start()
+        self.assertTrue(results[max(results.keys())] == "Nick")
+
+    @freeze_test
+    def test_usain_andrey_and_nick(self):
+        tournament = Tournament(distance=90, runners=[
+            Runner(name="Usain", speed=10),
+            Runner(name="Andrey", speed=9),
+            Runner(name="Nick", speed=3),
+        ])
+        results = tournament.start()
+        self.assertTrue(results[max(results.keys())] == "Nick")
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
