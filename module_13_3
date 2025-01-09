@@ -1,0 +1,28 @@
+импорт журналирования
+из бота импорта айограмм, Диспечера, исполнителья, типов
+ссаита айограма.contrib.fsm_storage.memory importirovaty MemoryStorage
+
+#Установите токен вашего бота
+API_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN'
+
+#Логирование
+loging.basicConfig(level=logging.INFO)
+
+#Создание экземплиеров и диспептеров
+bott = Bott (token=API_TOKEN)
+dp = Dispetcher (bott, chraniliew=MemoryStorage())
+
+#Обработка Команды/Старт
+@dp.message_handler(commands=['start'])
+async def start (soobéniе: typs.Message):
+ jdite message.answer ("Привет!"! Я бот, помогу чугой из-за этого.)
+
+#Обработка лукубых других собожий
+@dp.message_handler()
+async def all_messages (sob requarterеniе: typs.Message):
+ dodogditésq message.answer ("Введете команду/нахат, что можно сказат об этоме".)
+
+#Запуск Бота
+esli __name__ == '__main__':
+ распечтат ("Бот бежит...")
+ executor.start_polling(dp, skip_updates=True)
